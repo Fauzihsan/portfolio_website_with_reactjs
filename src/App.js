@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import JourneyPage from "./pages/JourneyPage";
+import PortfolioPage from "./pages/PortfolioPage";
+import PortfolioDetailPage from "./pages/PortfolioDetailPage";
+import DiaryPage from "./pages/DiaryPage";
+import LoginPage from "./pages/LoginPage";
+import DiaryAdminPage from "./pages/admin/DiaryAdminPage";
+import PortfolioAdminPage from "./pages/admin/PortfolioAdminPage";
+import HomePage from "./pages/admin/HomePage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/portfolio" element={<PortfolioPage />} />
+      <Route path="/portfolio/:portfolioId" element={<PortfolioDetailPage />} />
+      <Route path="/journey" element={<JourneyPage />} />
+      <Route path="/diary" element={<DiaryPage />} />
+
+      {/* admin page */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/admin" element={<HomePage />} />
+      <Route path="/admin/diary" element={<DiaryAdminPage />} />
+      <Route path="/admin/portfolio" element={<PortfolioAdminPage />} />
+    </Routes>
   );
 }
 

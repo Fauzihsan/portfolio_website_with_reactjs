@@ -1,0 +1,45 @@
+.mainPortfolio {
+  background-color: #454545;
+}
+
+.heroPortfolio {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/heroPortfolioPage.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-attachment: fixed;
+  max-width: 100%;
+}
+
+.menu {
+  color: #fffafa;
+  text-shadow: 5px 5px 4px #454545;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.link:hover {
+  color: #709cc7;
+}
+
+.titlePortfolio {
+  color: #fffafa;
+  text-shadow: 5px 5px 4px black;
+  font-weight: bold;
+}
+
+.descriptionPortfolio {
+  color: #fffafa;
+  opacity: 0.5;
+}
+
+.contentHeader {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/contentHeader.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-attachment: fixed;
+  max-width: 100%;
+}
