@@ -1,0 +1,95 @@
+.heroJourney {
+  background: url("../img/heroJourney.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 250vh;
+  width: 100%;
+  background-position-y: -600px;
+}
+
+.profilePictureJourney {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  /* box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887; */
+}
+
+.journeyTitle {
+  font-weight: 700;
+  line-height: 117px;
+  text-align: center;
+  color: #454545;
+  /* text-shadow: 5px 5px 4px #454545; */
+}
+
+.journeyDescription {
+  font-weight: 700;
+  line-height: 39px;
+  text-align: center;
+  color: #454545;
+  opacity: 0.5;
+}
+
+.introJourney {
+  background-attachment: fixed;
+  /* background: url("../img/bg-journey.png");
+  background-repeat: no-repeat;
+  width: 100%; */
+  /* background-position-y: -300px;
+  background-position-x: ;
+  background-size: cover; */
+}
+
+.bg-journey {
+  margin-top: -150px;
+}
+
+.descriptionJourney {
+  background: #fffafa;
+  box-shadow: 5px 5px 4px #000000;
+  border-radius: 10px;
+  opacity: 0.5;
+  color: #454545;
+  font-weight: 700;
+}
+
+.btn-journey {
+  background: #fffafa;
+  box-shadow: 5px 5px 4px #000000;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-journey > button {
+  color: #24507b;
+  font-weight: 700;
+}
+
+.titleCategoryJourney {
+  font-weight: 700;
+  color: #24507b;
+  border: 2px solid #24507b;
+}
+
+.listCategoryJourney {
+  color: #454545;
+  font-weight: 700;
+  line-height: 39px;
+  opacity: 0.5;
+}
+
+.button-to-diary {
+  color: #fffafa;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 44px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: #24507b;
+  box-shadow: 5px 5px 4px #000000;
+  border-radius: 10px;
+}

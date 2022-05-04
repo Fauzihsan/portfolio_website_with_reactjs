@@ -1,5 +1,5 @@
 .mainPortfolio {
-  background-color: #454545;
+  background-color: #fffafa;
 }
 
 .heroPortfolio {
@@ -35,11 +35,75 @@
   opacity: 0.5;
 }
 
+.image {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887;
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887;
+  position: absolute;
+  top: 80vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: #24507b;
+  box-shadow: 5px 5px 4px #000000;
+  background: url("../img/me2.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .contentHeader {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/contentHeader.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../img/contentHeader.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   background-attachment: fixed;
   max-width: 100%;
+}
+
+.card-portfolio {
+  height: max-content;
+  width: 40%;
+  position: relative;
+  border-radius: 50px;
+  background: #fffafa;
+  box-shadow: 20px 20px 60px #d9d5d5, -20px -20px 60px #ffffff;
+}
+
+.aboutmeTitle {
+  color: #24507b;
+  font-weight: bold;
+}
+
+.aboutmeDescription {
+  color: #24507b;
+  opacity: 50%;
+}
+
+.card-detail-portfolio {
+  height: max-content;
+  width: 70%;
+  position: relative;
+  border-radius: 50px;
+  background: #fffafa;
+  box-shadow: 20px 20px 60px #d9d5d5, -20px -20px 60px #ffffff;
+}
+
+.title-detail-portfolio {
+  color: #24507b;
+  font-weight: bold;
+}
+
+.category-detail-portfolio {
+  font-weight: 700;
+  color: #709cc7;
+  opacity: 0.5;
+}
+
+.description-detail-portfolio {
+  color: #24507b;
+  opacity: 50%;
 }

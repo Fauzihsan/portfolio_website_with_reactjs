@@ -11,7 +11,7 @@ function DashboardListItem() {
   }, []);
   return (
     <div className="flex flex-row gap-x-10 justify-center">
-      <div className="card-dashboard p-5" data-aos="fade-right" data-aos-delay="0" data-aos-duration="2000">
+      <div className="card-dashboard p-5" data-aos="fade-left" data-aos-delay="0" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
             <p className="sumDashboardTitle text-center text-6xl font-bold">19</p>
@@ -20,7 +20,7 @@ function DashboardListItem() {
           <p className="sumDashboardTitle text-center text-2xl">Diarys</p>
         </div>
       </div>
-      <div className="card-dashboard p-5" data-aos="fade-right" data-aos-delay="500" data-aos-duration="2000">
+      <div className="card-dashboard p-5" data-aos="fade-left" data-aos-delay="500" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
             <p className="sumDashboardTitle text-center text-6xl font-bold">19</p>
@@ -29,7 +29,7 @@ function DashboardListItem() {
           <p className="sumDashboardTitle text-center text-2xl">Experiences</p>
         </div>
       </div>
-      <div className="card-dashboard p-5" data-aos="fade-right" data-aos-delay="1000" data-aos-duration="2000">
+      <div className="card-dashboard p-5" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
             <p className="sumDashboardTitle text-center text-6xl font-bold">19</p>

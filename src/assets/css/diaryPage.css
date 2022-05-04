@@ -1,0 +1,43 @@
+* {
+  scroll-behavior: smooth;
+}
+
+.titleDiary {
+  font-weight: 700;
+  line-height: 117px;
+  text-align: center;
+  color: #24507b;
+}
+
+.descriptionDiary {
+  font-weight: 700;
+  line-height: 39px;
+  text-align: center;
+  color: #24507b;
+  opacity: 0.5;
+}
+
+.card-story {
+  height: max-content;
+  width: 70%;
+  position: relative;
+  border-radius: 50px;
+  background: #fffafa;
+  box-shadow: 20px 20px 60px #d9d5d5, -20px -20px 60px #ffffff;
+}
+
+.titleStory {
+  color: #24507b;
+  font-weight: bold;
+}
+
+.dateplace {
+  font-weight: 700;
+  color: #709cc7;
+  opacity: 0.5;
+}
+
+.descriptionStory {
+  color: #24507b;
+  opacity: 50%;
+}

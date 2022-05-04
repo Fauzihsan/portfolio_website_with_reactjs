@@ -7,6 +7,9 @@ import "aos/dist/aos.css";
 
 import "../assets/css/landingPageStyle.css";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+import ButtonBackToTop from "../components/ButtonBackToTop";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   useEffect(() => {
@@ -28,7 +31,7 @@ function LandingPage() {
           </p>
         </div>
       </div>
-      <p className="name lg:-mt-48 mt-5 text-center lg:text-lg text-xs">Muhammad Ihsan Fauzi Rahman - West Java, Indonesia</p>
+      <p className="name lg:-mt-80 text-center lg:text-lg text-xs">Muhammad Ihsan Fauzi Rahman - West Java, Indonesia</p>
       <div className="card-dark lg:pt-10 lg:pb-10 ">
         <div className="justify-center flex flex-row gap-x-5">
           <div className="profilePicture lg:basis-1/8 flex-initial">
@@ -74,7 +77,9 @@ function LandingPage() {
               <p className="contentDescription text-center">Here you will find out the work experience, internship, and organization of Ihsan Fauzi</p>
             </div>
           </div>
-          <button className="button-primary">Let's Journey</button>
+          <Link to="/journey">
+            <button className="button-primary">Let's Journey</button>
+          </Link>
         </div>
 
         <div className="card-light p-10" data-aos="fade-up" data-aos-duration="2000">
@@ -88,7 +93,9 @@ function LandingPage() {
               <p className="contentDescription text-center">Here you will find out about Ihsan Fauzi skills, such as networking skills, hardware skills, and of course software & programming skills</p>
             </div>
           </div>
-          <button className="button-primary">Let's Journey</button>
+          <Link to="/journey">
+            <button className="button-primary">Let's Journey</button>
+          </Link>
         </div>
 
         <div className="card-light p-10" data-aos="fade-up" data-aos-duration="2000">
@@ -102,12 +109,13 @@ function LandingPage() {
               <p className="contentDescription text-center">Here you will find out about what Ihsan Fauzi has created</p>
             </div>
           </div>
-          <button className="button-primary">Let's Journey</button>
+          <Link to="/portfolio">
+            <button className="button-primary">Let's Journey</button>
+          </Link>
         </div>
       </div>
-      <div className="footer text-center p-5">
-        <p>© Copyright 2022 fauzihsan. All rights reserved.</p>
-      </div>
+      <ButtonBackToTop />
+      <Footer />
     </div>
   );
 }
