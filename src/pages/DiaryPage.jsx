@@ -17,7 +17,7 @@ function DiaryPage() {
           </button>
         </Link>
         <h1 className="titleDiary text-7xl">Diary</h1>
-        <p className="descriptionDiary w-1/2 mx-auto">This is the page where Ihsan Fauzi wants to share his story with you, whether it's his activities or when he gets a certificate or certain award</p>
+        <p className="descriptionDiary lg:w-1/2 w-3/4 mx-auto">This is the page where Ihsan Fauzi wants to share his story with you, whether it's his activities or when he gets a certificate or certain award</p>
         <ListStory />
       </div>
       <ButtonBackToTop />

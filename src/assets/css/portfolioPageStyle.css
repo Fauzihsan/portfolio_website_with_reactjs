@@ -6,7 +6,7 @@
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/heroPortfolioPage.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  /* height: 100vh; */
   background-attachment: fixed;
   max-width: 100%;
 }
@@ -39,7 +39,7 @@
   width: 300px;
   height: 300px;
   overflow: hidden;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887;
   box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887;
   position: absolute;
@@ -61,12 +61,12 @@
   background-repeat: no-repeat;
   height: 100vh;
   background-attachment: fixed;
-  max-width: 100%;
+  width: 100%;
 }
 
 .card-portfolio {
   height: max-content;
-  width: 40%;
+  /* width: 40%; */
   position: relative;
   border-radius: 50px;
   background: #fffafa;
@@ -81,6 +81,29 @@
 .aboutmeDescription {
   color: #24507b;
   opacity: 50%;
+}
+
+.btn-aboutme,
+.btn-readmore {
+  color: #fffafa;
+  font-weight: 700;
+  /* font-size: 20px; */
+  line-height: 44px;
+  position: absolute;
+  top: 85%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 150px; */
+  /* height: 70px; */
+  background: #24507b;
+  box-shadow: 5px 5px 4px #000000;
+  border-radius: 10px;
+}
+
+.btn-readmore {
+  top: 95%;
 }
 
 .card-detail-portfolio {
@@ -106,4 +129,42 @@
 .description-detail-portfolio {
   color: #24507b;
   opacity: 50%;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .heroPortfolio {
+    background-size: contain;
+  }
+  .contentHeader {
+    background: none;
+    height: max-content;
+  }
+  .image {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .heroPortfolio {
+    background-size: contain;
+  }
+
+  .contentHeader {
+    background: none;
+    height: max-content;
+  }
+
+  .btn-aboutme {
+    top: 90%;
+  }
+
+  .image {
+    position: relative;
+    top: 0;
+    width: 150px;
+    height: 150px;
+  }
 }

@@ -42,18 +42,18 @@ function LoginPage() {
       <Link to="/">
         <FaHome style={{ fontSize: "30px", color: "#fffafa", opacity: "0.5" }} className="absolute left-5 top-5" />
       </Link>
-      <div className="box p-10 ">
+      <div className="box lg:p-10 p-3 ">
         <h1 className="title text-center text-3xl">I's Journey</h1>
-        <div className="flex justify-center p-5 gap-x-10">
+        <div className="flex lg:flex-row flex-col items-center justify-center p-5 gap-x-10">
           <div className="profilePictureLogin ">
             <img className="" src={require("../assets/img/me.jpg")} alt="" />
           </div>
           <form action="" onSubmit={handleLogin}>
             <div className="p-5">
-              <input type="email" value={email} onChange={handleChangeEmail} className="inputEmail bg-transparent border-b-2 outline-none w-80 " required placeholder="Email" />
+              <input type="email" value={email} onChange={handleChangeEmail} className="inputEmail bg-transparent border-b-2 outline-none w-full " required placeholder="Email" />
             </div>
             <div className="p-5">
-              <input type="password" value={password} onChange={handleChangePassword} className="bg-transparent border-b-2 outline-none w-80" required placeholder="Password" />
+              <input type="password" value={password} onChange={handleChangePassword} className="bg-transparent border-b-2 outline-none w-full" required placeholder="Password" />
             </div>
             <div className="text-center p-3">
               <button type="submit" className="btn-login text-center px-10 py-2">

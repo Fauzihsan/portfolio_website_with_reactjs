@@ -24,7 +24,7 @@
 }
 
 .journeyDescription {
-  font-weight: 700;
+  /* font-weight: 700; */
   line-height: 39px;
   text-align: center;
   color: #454545;
@@ -46,12 +46,11 @@
 }
 
 .descriptionJourney {
-  background: #fffafa;
+  background: rgba(250, 250, 250, 0.4);
   box-shadow: 5px 5px 4px #000000;
   border-radius: 10px;
-  opacity: 0.5;
-  color: #454545;
   font-weight: 700;
+  color: #454545;
 }
 
 .btn-journey {
@@ -83,7 +82,6 @@
 .button-to-diary {
   color: #fffafa;
   font-weight: 700;
-  font-size: 20px;
   line-height: 44px;
   left: 0;
   right: 0;
@@ -92,4 +90,27 @@
   background: #24507b;
   box-shadow: 5px 5px 4px #000000;
   border-radius: 10px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .heroJourney {
+    background-position-x: 60%;
+    background-position-y: 60%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .heroJourney {
+    height: 100%;
+    background-position-y: 50%;
+    background-position-x: 50%;
+  }
+  .journeyTitle {
+    line-height: 50px;
+  }
+
+  .journeyDescription {
+    line-height: 20px;
+  }
 }

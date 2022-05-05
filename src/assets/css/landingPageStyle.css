@@ -6,7 +6,6 @@
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/heroLandingPage.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: max-content;
   padding-bottom: 400px;
   background-attachment: fixed;
   max-width: 100%;
@@ -56,8 +55,10 @@
   margin-left: auto;
   margin-right: auto;
 
-  width: 70%;
-  position: absolute;
+  /* hapus */
+  /* width: 70%; */
+
+  position: relative;
   top: 90%;
   border-radius: 50px;
   background: #454545;
@@ -74,7 +75,7 @@
   width: 200px;
   height: 200px;
   overflow: hidden;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 .profileTitle {
@@ -105,7 +106,10 @@
   margin-left: auto;
   margin-right: auto;
   height: max-content;
-  width: 70%;
+
+  /* hapus */
+  /* width: 70%; */
+
   position: relative;
   border-radius: 50px;
   background: #fffafa;
@@ -121,7 +125,6 @@
 
 .contentTitle {
   color: #24507b;
-  font-size: 50px;
   font-weight: bold;
 }
 
@@ -137,7 +140,7 @@
 .button-primary {
   color: #fffafa;
   font-weight: 700;
-  font-size: 20px;
+  /* font-size: 20px; */
   line-height: 44px;
   position: absolute;
   left: 0;
@@ -159,11 +162,13 @@
 @media (min-width: 320px) and (max-width: 480px) {
   .hero {
     background-size: contain;
-    background-repeat: no-repeat;
-    height: max-content;
+    padding-bottom: 0px;
     background-attachment: fixed;
     max-width: 100%;
-    height: 0px;
+  }
+
+  .content {
+    background-size: cover;
   }
 
   .card-dark {
