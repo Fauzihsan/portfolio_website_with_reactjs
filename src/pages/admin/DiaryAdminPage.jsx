@@ -2,25 +2,26 @@ import React from "react";
 import DateTime from "../../components/DateTime";
 import SideBar from "../../components/SideBar";
 import { MdTitle, MdImage, MdPlace, MdDateRange, MdDescription, MdEdit, MdDelete } from "react-icons/md";
+import FormAddDiary from "../../components/FormAddDiary";
 
 function DiaryAdminPage() {
   return (
     <>
       <SideBar />
       <DateTime />
-      <div className="mainAdmin lg:p-7 lg:text-xl text-xs mx-auto">
-        <h1 className="titleAdmin">Diary</h1>
+      <div className="mainAdmin lg:p-7 px-5 lg:text-xl text-xs mx-auto">
+        <h1 className="titleAdmin text-3xl text-center py-3">Diary</h1>
         <div className="py-5">
           <div className="overflow-x-auto w-full overflow-y-auto h-72">
             <table className="mx-auto w-full whitespace-normal rounded-lg bg-gray-200 divide-y divide-gray-300 overflow-hidden">
               <thead className="thead">
                 <tr className="text-white text-left">
-                  <th className="font-semibold text-sm uppercase px-6 py-4"> No </th>
-                  <th className="font-semibold text-sm uppercase px-6 py-4"> Title </th>
-                  <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Desciption </th>
-                  <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Image </th>
-                  <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Place & Date </th>
-                  <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Action </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2"> No </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2"> Title </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Desciption </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Image </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Place & Date </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Action </th>
                 </tr>
               </thead>
               <tbody className="tbody divide-y divide-gray-200 align-top">
@@ -54,61 +55,10 @@ function DiaryAdminPage() {
           </div>
         </div>
         <form action="" className="formDiary container py-5">
-          <div className="flex flex-row gap-x-5 justify-center">
-            <div className="flex flex-col gap-y-3 justify-start w-1/2">
-              <label htmlFor="">Title</label>
-              <div className="flex flex-row items-center">
-                <MdTitle style={{ fontSize: "34px" }} />
-                <input
-                  type="text"
-                  className="form-control w-full blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleInput7"
-                  placeholder="Title"
-                />
-              </div>
-              <label htmlFor="">Foto</label>
-              <div className="flex flex-row items-center">
-                <MdImage style={{ fontSize: "34px" }} />
-                <input type="file" name="" id="" className="border-2 p-1 text-sm w-full" />
-              </div>
-              <label htmlFor="">Place</label>
-              <div className="flex flex-row items-center">
-                <MdPlace style={{ fontSize: "34px" }} />
-                <input
-                  type="text"
-                  className="w-full form-control blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleInput7"
-                  placeholder="Place"
-                />
-              </div>
-              <label htmlFor="">Date</label>
-              <div className="flex flex-row items-center">
-                <MdDateRange style={{ fontSize: "34px" }} />
-                <input
-                  type="date"
-                  name=""
-                  id=""
-                  className="form-control w-full blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-3 justify-start w-1/3">
-              <label htmlFor="">Description</label>
-              <div className="flex flex-row items-start">
-                <MdDescription style={{ fontSize: "34px" }} />
-                <textarea
-                  name=""
-                  className="form-control blockw-full px-3 py-1.5 h-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id=""
-                  cols="30"
-                  rows="12"
-                ></textarea>
-              </div>
-            </div>
-          </div>
+          <FormAddDiary />
           <div className="flex flex-row gap-x-5 p-5 justify-center">
-            <button className="btn-reset w-1/6 text-center py-2">Reset</button>
-            <button className="btn-submit w-1/6 text-center py-2">Submit</button>
+            <button className="btn-reset lg:w-1/6 w-1/2 text-center py-2">Reset</button>
+            <button className="btn-submit lg:w-1/6 w-1/2 text-center py-2">Submit</button>
           </div>
         </form>
       </div>
@@ -126,65 +76,14 @@ function DiaryAdminPage() {
             </div>
             <div className="p-6 space-y-6">
               <form action="" className="formDiary container py-5">
-                <div className="flex flex-row gap-x-5 justify-center">
-                  <div className="flex flex-col gap-y-3 justify-start w-1/2">
-                    <label htmlFor="">Title</label>
-                    <div className="flex flex-row items-center">
-                      <MdTitle style={{ fontSize: "34px" }} />
-                      <input
-                        type="text"
-                        className="form-control w-full blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput7"
-                        placeholder="Title"
-                      />
-                    </div>
-                    <label htmlFor="">Foto</label>
-                    <div className="flex flex-row items-center">
-                      <MdImage style={{ fontSize: "34px" }} />
-                      <input type="file" name="" id="" className="border-2 p-1 text-sm w-full" />
-                    </div>
-                    <label htmlFor="">Place</label>
-                    <div className="flex flex-row items-center">
-                      <MdPlace style={{ fontSize: "34px" }} />
-                      <input
-                        type="text"
-                        className="w-full form-control blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id="exampleInput7"
-                        placeholder="Place"
-                      />
-                    </div>
-                    <label htmlFor="">Date</label>
-                    <div className="flex flex-row items-center">
-                      <MdDateRange style={{ fontSize: "34px" }} />
-                      <input
-                        type="date"
-                        name=""
-                        id=""
-                        className="form-control w-full blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-y-3 justify-start w-1/3">
-                    <label htmlFor="">Description</label>
-                    <div className="flex flex-row items-start">
-                      <MdDescription style={{ fontSize: "34px" }} />
-                      <textarea
-                        name=""
-                        className="form-control blockw-full px-3 py-1.5 h-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        id=""
-                        cols="30"
-                        rows="12"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
+                <FormAddDiary />
               </form>
             </div>
-            <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-              <button data-modal-toggle="modal-update" type="button" className="btn-submit w-1/6 text-center py-2">
+            <div className="flex justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+              <button data-modal-toggle="modal-update" type="button" className="btn-submit lg:w-1/6 w-1/2 text-center py-2">
                 Update
               </button>
-              <button data-modal-toggle="modal-update" type="button" className="btn-reset w-1/6 text-center py-2">
+              <button data-modal-toggle="modal-update" type="button" className="btn-reset lg:w-1/6 w-1/2 text-center py-2">
                 Cancel
               </button>
             </div>

@@ -38,8 +38,8 @@ function LandingPage() {
             <img src={require("../assets/img/me.jpg")} alt="" />
           </div>
           <div className="lg:w-2/3 lg:py-5 px-5 gap-y-4 flex flex-col">
-            <p className="profileTitle text-center lg:text-3xl text-xl">Hello everyone, i’m a Software Engineering especially Javascript Enthusiast</p>
-            <p className="profileDescription text-center">"enthusiasm and consistency are the main keys to achieve success on your every journey",-</p>
+            <p className="profileTitle text-center lg:text-3xl text-xl">Hello everyone, i’m a Software Engineer especially Javascript Enthusiast</p>
+            <p className="profileDescription text-center">"enthusiasm, consistency, and dedicated are the main keys to achieve success on your every journey",-</p>
           </div>
         </div>
         <div className="profileDescription w-full lg:text-lg text-xs p-5">

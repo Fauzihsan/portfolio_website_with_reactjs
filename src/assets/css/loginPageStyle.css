@@ -1,19 +1,16 @@
 .mainLogin {
   background-color: #24507b;
   height: 100vh;
+  width: 100vw;
+  position: fixed;
 }
 
 .profilePictureLogin {
-  width: 200px;
-  height: 200px;
   overflow: hidden;
-  border-radius: 50%;
   box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.25), -20px -20px 60px #285887;
 }
 
 .box {
-  width: 70%;
-  height: 70%;
   border-radius: 50px;
   background: #24507b;
   box-shadow: 20px 20px 50px #20486f, -20px -20px 50px #285887;
@@ -26,6 +23,16 @@
 
 form {
   color: #fffafa;
+}
+
+.inputField {
+  border-bottom: 2px solid #023769;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border: none;
 }
 
 .btn-login {

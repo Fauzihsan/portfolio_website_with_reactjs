@@ -14,7 +14,6 @@
 .titleAdmin {
   font-weight: bolder;
   line-height: 59px;
-  text-align: start;
   background: linear-gradient(299.49deg, #24507b 7.39%, #709cc7 97.77%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,7 +38,6 @@
 
 .card-dashboard {
   height: max-content;
-  width: 30%;
   position: relative;
   border-radius: 30px;
   background: #fffafa;
@@ -70,6 +68,7 @@ ul li {
   background: var(--primary-color);
   box-shadow: 10px 10px 20px #20486f, -10px -10px 20px #285887;
   transition: all 0.5s ease;
+  z-index: 8;
 }
 
 .sidebar .header {
@@ -206,21 +205,28 @@ label #cancel {
   color: var(--primary-color);
 }
 
-@media only screen and (min-width: 600px) {
-  #check:checked ~ .mainAdmin {
-    width: 80%;
-    margin-left: 10%;
+@media (min-width: 320px) and (max-width: 1024px) {
+  .mainAdmin {
+    margin-left: 0;
+    width: 100%;
   }
-}
-@media only screen and (max-width: 600px) {
   .sidebar {
-    width: 53%;
+    left: -100%;
+    width: 75%;
   }
-  .navEdit {
-    font-size: 3vw;
+  label #btn {
+    left: 40px;
   }
   label #cancel {
-    left: 40%;
-    margin: 0px;
+    left: -195px;
+  }
+  #check:checked ~ label #btn {
+    left: -100%;
+  }
+  #check:checked ~ label #cancel {
+    left: 60%;
+  }
+  #check:checked ~ .sidebar {
+    left: 0;
   }
 }

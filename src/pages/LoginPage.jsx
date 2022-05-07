@@ -38,22 +38,22 @@ function LoginPage() {
   }
 
   return (
-    <div className="mainLogin justify-center items-center flex ">
+    <div className="mainLogin flex justify-center items-center">
       <Link to="/">
         <FaHome style={{ fontSize: "30px", color: "#fffafa", opacity: "0.5" }} className="absolute left-5 top-5" />
       </Link>
-      <div className="box lg:p-10 p-3 ">
+      <div className="box lg:p-10 p-3 w-3/4 h-3/4">
         <h1 className="title text-center text-3xl">I's Journey</h1>
-        <div className="flex lg:flex-row flex-col items-center justify-center p-5 gap-x-10">
-          <div className="profilePictureLogin ">
+        <div className="flex lg:flex-row flex-col items-center justify-center lg:p-5 py-5 gap-x-10">
+          <div className="profilePictureLogin lg:w-60 lg:h-60 w-32 h-32 rounded-full">
             <img className="" src={require("../assets/img/me.jpg")} alt="" />
           </div>
-          <form action="" onSubmit={handleLogin}>
+          <form action="" onSubmit={handleLogin} className="lg:w-1/2 w-full">
             <div className="p-5">
-              <input type="email" value={email} onChange={handleChangeEmail} className="inputEmail bg-transparent border-b-2 outline-none w-full " required placeholder="Email" />
+              <input type="email" value={email} onChange={handleChangeEmail} className="inputField w-full bg-transparent outline-none border-none placeholder:text-white" required placeholder="Email" />
             </div>
             <div className="p-5">
-              <input type="password" value={password} onChange={handleChangePassword} className="bg-transparent border-b-2 outline-none w-full" required placeholder="Password" />
+              <input type="password" value={password} onChange={handleChangePassword} className="inputField w-full bg-transparent outline-none border-none placeholder:text-white focus:outline-dotted " required placeholder="Password" />
             </div>
             <div className="text-center p-3">
               <button type="submit" className="btn-login text-center px-10 py-2">
