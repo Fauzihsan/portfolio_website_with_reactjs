@@ -14,7 +14,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/portfolio" element={<PortfolioPage />} />
-      <Route path="/portfolio/:portfolioId" element={<PortfolioDetailPage />} />
+      <Route path="/portfolio/:id" element={<PortfolioDetailPage />} />
       <Route path="/journey" element={<JourneyPage />} />
       <Route path="/diary" element={<DiaryPage />} />
 

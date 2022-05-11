@@ -9,7 +9,7 @@ function SideBar() {
       <input type="checkbox" id="check" />
       <label htmlFor="check">
         <FaBars id="btn" />
-        <FaWindowClose style={{ fontSize: "40px" }} id="cancel" />
+        <FaWindowClose className="w-8" id="cancel" />
       </label>
 
       <div className="sidebar">

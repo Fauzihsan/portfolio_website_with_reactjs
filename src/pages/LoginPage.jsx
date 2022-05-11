@@ -2,7 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { FaHome } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { GetUser } from "../apollo-client/gql";
+import { GetUser } from "../graphql/query";
 
 import "../assets/css/loginPageStyle.css";
 import LoadingAnimation from "../components/LoadingAnimation";

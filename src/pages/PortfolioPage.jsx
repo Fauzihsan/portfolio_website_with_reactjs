@@ -7,8 +7,13 @@ import NavBar from "../components/NavBar";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
+import { GetPortfolio } from "../graphql/query";
+import { useQuery } from "@apollo/client";
+import PortfolioDetailPage from "./PortfolioDetailPage";
 
 function PortfolioPage() {
+  const { data } = useQuery(GetPortfolio);
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -49,57 +54,20 @@ function PortfolioPage() {
       </div>
 
       <div className="listPortfolio justify-center lg:py-20 py-48 px-10 gap-20 flex flex-row flex-wrap">
-        <div className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
-          <div className="justify-center gap-x-1">
-            <div className="p-5 gap-y-4 flex flex-col">
-              <img src={require("../assets/img/thumbnailPortfolio.png")} alt="" />
-              <p className="aboutmeTitle text-center text-2xl">Aplikasi Tournament</p>
-              <p className="aboutmeDescription text-center">Teknologi yang digunakan adalah Flutter, PostgreSql, Rest API dengan Laravel,dll</p>
+        {data?.portfolio.map((item) => (
+          <div key={item.id} className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
+            <div className="justify-center gap-x-1">
+              <div className="p-5 gap-y-4 flex flex-col">
+                <img src={item.image} alt="" />
+                <p className="aboutmeTitle text-center text-2xl">{item.title}</p>
+                <p className="aboutmeDescription text-center">{item.description.slice(0, 50) + (item.description.length > 50 ? " ... " : "")}</p>
+              </div>
             </div>
+            <Link to={`/portfolio/${item.id}`}>
+              <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
+            </Link>
           </div>
-          <Link to="/portfolio/2">
-            <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
-          </Link>
-        </div>
-
-        <div className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
-          <div className="justify-center gap-x-1">
-            <div className="p-5 gap-y-4 flex flex-col">
-              <img src={require("../assets/img/thumbnailPortfolio.png")} alt="" />
-              <p className="aboutmeTitle text-center text-2xl">Aplikasi Tournament</p>
-              <p className="aboutmeDescription text-center">Teknologi yang digunakan adalah Flutter, PostgreSql, Rest API dengan Laravel,dll</p>
-            </div>
-          </div>
-          <Link to="/portfolio/2">
-            <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
-          </Link>
-        </div>
-
-        <div className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
-          <div className="justify-center gap-x-1">
-            <div className="p-5 gap-y-4 flex flex-col">
-              <img src={require("../assets/img/thumbnailPortfolio.png")} alt="" />
-              <p className="aboutmeTitle text-center text-2xl">Aplikasi Tournament</p>
-              <p className="aboutmeDescription text-center">Teknologi yang digunakan adalah Flutter, PostgreSql, Rest API dengan Laravel,dll</p>
-            </div>
-          </div>
-          <Link to="/portfolio/2">
-            <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
-          </Link>
-        </div>
-
-        <div className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
-          <div className="justify-center gap-x-1">
-            <div className="p-5 gap-y-4 flex flex-col">
-              <img src={require("../assets/img/thumbnailPortfolio.png")} alt="" />
-              <p className="aboutmeTitle text-center text-2xl">Aplikasi Tournament</p>
-              <p className="aboutmeDescription text-center">Teknologi yang digunakan adalah Flutter, PostgreSql, Rest API dengan Laravel,dll</p>
-            </div>
-          </div>
-          <Link to="/portfolio/2">
-            <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
-          </Link>
-        </div>
+        ))}
       </div>
       <ButtonBackToTop />
       <Footer dark="true" />
