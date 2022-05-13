@@ -4,7 +4,7 @@ import "../assets/css/adminPage.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function DashboardListItem() {
+function DashboardListItem({ diary, experience, project }) {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -14,7 +14,7 @@ function DashboardListItem() {
       <div className="card-dashboard lg:w-1/3 w-1/2 p-5" data-aos="fade-left" data-aos-delay="0" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
-            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">19</p>
+            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">{diary}</p>
             <p className="sumDashboardDescription text-center text-lg ">Post</p>
           </div>
           <p className="sumDashboardTitle text-center lg:text-2xl text-lg">Diarys</p>
@@ -23,7 +23,7 @@ function DashboardListItem() {
       <div className="card-dashboard lg:w-1/3 w-1/2 p-5" data-aos="fade-left" data-aos-delay="500" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
-            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">19</p>
+            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">{experience}</p>
             <p className="sumDashboardDescription text-center lg:text-lg text-sm ">Post</p>
           </div>
           <p className="sumDashboardTitle text-center lg:text-2xl text-lg">Experiences</p>
@@ -32,7 +32,7 @@ function DashboardListItem() {
       <div className="card-dashboard lg:w-1/3 w-1/2 p-5" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="2000">
         <div className="justify-center flex flex-col gap-y-5">
           <div className="flex flex-row justify-center items-end ">
-            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">19</p>
+            <p className="sumDashboardTitle text-center lg:text-6xl text-4xl font-bold">{project}</p>
             <p className="sumDashboardDescription text-center lg:text-lg text-sm ">Post</p>
           </div>
           <p className="sumDashboardTitle text-center lg:text-2xl text-lg">Projects</p>

@@ -24,26 +24,65 @@ export const GetDiary = gql`
   }
 `;
 
+// export const GetPortfolio = gql`
+//   query MyQuery {
+//     portfolio(order_by: { id: desc }) {
+//       id
+//       title
+//       image
+//       description
+//       categories_id
+//     }
+//   }
+// `;
+
 export const GetPortfolio = gql`
   query MyQuery {
-    portfolio(order_by: { id: desc }) {
-      id
+    portfolio {
+      portfolio_id
       title
-      image
       description
       categories_id
+      imagePortfolio {
+        id
+        image
+        portfolio_id
+      }
+    }
+  }
+`;
+
+export const GetImagePortfolio = gql`
+  query MyQuery {
+    image {
+      id
+      image
+      portfolio_id
+    }
+  }
+`;
+
+export const GetImagePortfolioById = gql`
+  query MyQuery($portfolio_id: String!) {
+    image(where: { portfolio_id: { _eq: $portfolio_id } }) {
+      id
+      image
+      portfolio_id
     }
   }
 `;
 
 export const GetPortfolioById = gql`
-  query MyQuery($id: Int!) {
-    portfolio_by_pk(id: $id) {
-      id
+  query MyQuery($portfolio_id: String!) {
+    portfolio(where: { portfolio_id: { _eq: $portfolio_id } }) {
+      portfolio_id
       title
       description
-      image
       categories_id
+      imagePortfolio {
+        id
+        image
+      }
     }
   }
 `;

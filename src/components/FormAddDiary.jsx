@@ -4,8 +4,6 @@ import { MdTitle, MdImage, MdPlace, MdDescription } from "react-icons/md";
 function FormAddDiary(props) {
   const { title, image, place, description } = props.data;
   const imageRef = useRef();
-  console.log(image + title);
-
   return (
     <div className="flex lg:flex-row flex-col gap-x-5 justify-center">
       <div className="flex flex-col gap-y-3 justify-start lg:w-1/2 w-full">

@@ -7,17 +7,17 @@ import NavBar from "../components/NavBar";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
-import { GetPortfolio } from "../graphql/query";
-import { useQuery } from "@apollo/client";
-import PortfolioDetailPage from "./PortfolioDetailPage";
+import { useSubscription } from "@apollo/client";
+import { SubscriptionPortfolio } from "../graphql/subscription";
 
 function PortfolioPage() {
-  const { data } = useQuery(GetPortfolio);
+  const { data } = useSubscription(SubscriptionPortfolio);
 
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
+
   return (
     <div className="mainPortfolio">
       <div className="heroPortfolio lg:h-screen h-max bg-cover">
@@ -55,15 +55,15 @@ function PortfolioPage() {
 
       <div className="listPortfolio justify-center lg:py-20 py-48 px-10 gap-20 flex flex-row flex-wrap">
         {data?.portfolio.map((item) => (
-          <div key={item.id} className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
+          <div key={item.portfolio_id} className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
             <div className="justify-center gap-x-1">
               <div className="p-5 gap-y-4 flex flex-col">
-                <img src={item.image} alt="" />
+                {data?.portfolio.imagePortfolio !== [] ? <img src={item.imagePortfolio[0]?.image} alt="" /> : []}
                 <p className="aboutmeTitle text-center text-2xl">{item.title}</p>
                 <p className="aboutmeDescription text-center">{item.description.slice(0, 50) + (item.description.length > 50 ? " ... " : "")}</p>
               </div>
             </div>
-            <Link to={`/portfolio/${item.id}`}>
+            <Link to={`/portfolio/${item.portfolio_id}`}>
               <button className="btn-readmore lg:w-1/3 md:w-1/3 lg:h-max lg:py-3 md:py-3 w-1/2 lg:text-xl md:text-xl text-sm top-full">Read More</button>
             </Link>
           </div>

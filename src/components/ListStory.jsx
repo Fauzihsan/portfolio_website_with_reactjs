@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import "../assets/css/diaryPage.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { GetDiary } from "../graphql/query";
-import { useQuery } from "@apollo/client";
+import { useSubscription } from "@apollo/client";
+import { SubscriptionDiary } from "../graphql/subscription";
 
 function ListStory() {
-  const { data } = useQuery(GetDiary);
+  const { data } = useSubscription(SubscriptionDiary);
   useEffect(() => {
     AOS.init();
     AOS.refresh();

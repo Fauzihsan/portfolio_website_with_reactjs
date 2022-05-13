@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { UpdatePortfolio } from "../graphql/mutation";
+import { UpdatePortfolio, InsertImage, DeleteImage } from "../graphql/mutation";
 import { useQuery } from "@apollo/client";
-import { GetPortfolioCategory, GetPortfolio } from "../graphql/query";
+import { GetPortfolioCategory, GetPortfolio, GetImagePortfolioById } from "../graphql/query";
 import { MdEdit } from "react-icons/md";
 import { useMutation } from "@apollo/client";
 import { useRef } from "react";
@@ -13,21 +13,33 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage
 import PortfolioAdminPage from "../pages/admin/PortfolioAdminPage";
 
 function ModalUpdatePortfolio({ data }) {
-  const { id, title, image, categories_id, description } = data;
+  const { portfolio_id, title, categories_id, description } = data;
   const portfolioUpdate = {
-    id,
+    portfolio_id,
     title,
-    image,
     categories_id,
     description,
   };
   const [modalUpdate, setModalUpdate] = useState(false);
-  const [imageUpdate, setImageUpdate] = useState(null);
+  const [image, setImage] = useState([]);
+  const [imageUpdate, setImageUpdate] = useState([]);
   const [dataUpdate, setDataUpdate] = useState(portfolioUpdate);
   const imageRef = useRef();
 
   const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
+  const { data: dataImagePortfolio } = useQuery(GetImagePortfolioById, { variables: { portfolio_id } });
   const [updatePortfolio, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdatePortfolio, { refetchQueries: [GetPortfolio] });
+  const [deleteImage] = useMutation(DeleteImage, { refetchQueries: [GetPortfolio] });
+
+  const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
+
+  const handleFile = (e) => {
+    const images = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      images.push(e.target.files[i]);
+    }
+    setImageUpdate(images);
+  };
 
   const handleToggleModalUpdate = () => {
     setModalUpdate(!modalUpdate);
@@ -37,34 +49,51 @@ function ModalUpdatePortfolio({ data }) {
     if (!imageUpdate) {
       updatePortfolio({
         variables: {
-          id: id,
+          portfolio_id,
           title: dataUpdate.title,
-          image,
           categories_id: dataUpdate.categories_id,
           description: dataUpdate.description,
         },
       });
     } else {
-      const imageName = ref(storage, `portfolio/${imageUpdate.name}`);
-      const uploadTask = uploadBytes(imageName, imageUpdate);
+      updatePortfolio({
+        variables: {
+          portfolio_id,
+          title: dataUpdate.title,
+          categories_id: dataUpdate.categories_id,
+          description: dataUpdate.description,
+        },
+      });
 
-      uploadTask.then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((downloadURL) => {
-          const fileUrl = image;
-          const fileRef = ref(storage, fileUrl);
-          deleteObject(fileRef).then(() => {
-            updatePortfolio({
+      deleteImage({
+        variables: {
+          portfolio_id,
+        },
+      });
+      let uploadTask;
+
+      for (let i = 0; i < image.length; i++) {
+        const fileUrl = image[i];
+        const fileRef = ref(storage, fileUrl);
+        deleteObject(fileRef);
+      }
+
+      for (let i = 0; i < imageUpdate.length; i++) {
+        let imageName = ref(storage, `portfolio/${imageUpdate[i].name}`);
+        uploadTask = uploadBytes(imageName, imageUpdate[i]);
+        uploadTask.then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((downloadURL) => {
+            insertImagePortfolio({
               variables: {
-                id: id,
-                title: dataUpdate.title,
-                categories_id: parseInt(dataUpdate.categories_id),
-                image: downloadURL,
-                description: dataUpdate.description,
+                images: {
+                  portfolio_id,
+                  image: downloadURL,
+                },
               },
             });
           });
         });
-      });
+      }
     }
   };
 
@@ -86,10 +115,14 @@ function ModalUpdatePortfolio({ data }) {
     imageRef.current.value = "";
   };
 
+  {
+    dataImagePortfolio?.image.map((item) => {
+      image.push(item.image);
+    });
+  }
+
   if (loadingUpdate) return <PortfolioAdminPage />;
   if (errorUpdate) return console.log(`Error! : ${errorUpdate.message}`);
-
-  console.log(dataUpdate);
 
   return (
     <>
@@ -137,7 +170,7 @@ function ModalUpdatePortfolio({ data }) {
                           defaultValue={dataUpdate.categories_id}
                           onChange={handleChange}
                           id=""
-                          className="form-control w-full blockw-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          className="form-control w-full block px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         >
                           <option value="" disabled>
                             -- Pilih Kategori Portfolio --
@@ -152,20 +185,18 @@ function ModalUpdatePortfolio({ data }) {
                       <label htmlFor="" className="text-left">
                         Foto
                       </label>
-                      <div className="flex flex-row items-center">
-                        <MdImage style={{ fontSize: "34px" }} />
-                        <input
-                          type="file"
-                          name="image"
-                          ref={imageRef}
-                          onChange={(e) => {
-                            setImageUpdate(e.target.files[0]);
-                          }}
-                          id=""
-                          className="border-2 p-1 text-sm w-1/2"
-                        />
-
-                        <img src={image} alt="" className="w-1/3 mx-auto" />
+                      <div className="flex flex-col items-center gap-y-3">
+                        <div className="flex flex-row w-full items-center">
+                          <div className="flex flex-row items-center">
+                            <MdImage style={{ fontSize: "34px" }} />
+                            <input type="file" name="imagePortfolio" ref={imageRef} onChange={handleFile} id="" className="border-2 p-1 text-sm w-full" multiple />
+                          </div>
+                        </div>
+                        <div className="w-full mx-auto flex flex-row flex-wrap gap-x-5">
+                          {dataImagePortfolio?.image.map((item) => (
+                            <img key={item.id} src={item.image} alt="" className="w-1/5" />
+                          ))}
+                        </div>
                       </div>
                     </div>
                     <div className="flex flex-col gap-y-3 justify-start lg:w-1/3 w-full">

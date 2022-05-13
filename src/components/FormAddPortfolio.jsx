@@ -54,7 +54,6 @@ function FormAddPortfolio() {
     setImage(null);
     fotoRef.current.value = "";
   };
-  console.log(dataPortfolio);
   if (loadingInsert) return <LoadingAnimation />;
   if (errorInsert) return console.log(`Error : ${errorInsert.message}`);
   return (

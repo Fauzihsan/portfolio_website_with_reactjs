@@ -99,7 +99,6 @@ function DiaryAdminPage() {
     return <LoadingAnimation />;
   }
 
-  // console.log(allDiary);
   return (
     <>
       <SideBar />

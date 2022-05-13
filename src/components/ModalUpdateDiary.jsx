@@ -88,8 +88,6 @@ function ModalUpdateDiary({ data }) {
   if (loadingUpdate) return <DiaryAdminPage />;
   if (errorUpdate) return console.log(`Error! : ${errorUpdate.message}`);
 
-  console.log(dataUpdate);
-
   return (
     <>
       <button className="hover:underline" type="button" onClick={handleToggleModalUpdate}>
