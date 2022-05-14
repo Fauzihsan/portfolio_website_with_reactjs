@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { useRef } from "react";
 import storage from "../firebase";
 import { MdTitle, MdImage, MdPlace, MdDescription } from "react-icons/md";
+import Swal from "sweetalert2";
 
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import LoadingAnimation from "./LoadingAnimation";
@@ -25,7 +26,18 @@ function ModalUpdateDiary({ data }) {
   const [imageUpdate, setImageUpdate] = useState(null);
   const [dataUpdate, setDataUpdate] = useState(diaryUpdate);
   const imageRef = useRef();
-  const [updateDiary, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdateDiary, { refetchQueries: [GetDiary] });
+  const [updateDiary, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdateDiary, {
+    onCompleted: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Diary Updated Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    refetchQueries: [GetDiary],
+  });
 
   const handleToggleModalUpdate = () => {
     // setDataUpdate({ id, title, image, place, description });
@@ -171,7 +183,7 @@ function ModalUpdateDiary({ data }) {
                     <button type="submit" className="btn-submit lg:w-1/6 w-1/2 text-center py-2">
                       Update
                     </button>
-                    <button type="reset" className="btn-reset lg:w-1/6 w-1/2 text-center py-2" onClick={handleToggleModalUpdate}>
+                    <button onClick={handleToggleModalUpdate} className="btn-reset lg:w-1/6 w-1/2 text-center py-2">
                       Cancel
                     </button>
                   </div>

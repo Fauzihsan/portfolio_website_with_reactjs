@@ -12,6 +12,8 @@ import ModalUpdatePortfolio from "../../components/ModalUpdatePortfolio";
 import storage from "../../firebase";
 import { deleteObject, getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
+import Swal from "sweetalert2";
+
 import { v4 as uuidv4 } from "uuid";
 function PortfolioAdminPage() {
   const [modalDelete, setModalDelete] = useState(false);
@@ -26,7 +28,18 @@ function PortfolioAdminPage() {
   const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
 
   const [imageDelete, setImageDelete] = useState("");
-  const [deletePortfolio, { loading: loadingDelete }] = useMutation(DeletePortfolio, { refetchQueries: [GetPortfolio] });
+  const [deletePortfolio, { loading: loadingDelete }] = useMutation(DeletePortfolio, {
+    onCompleted: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Portfolio Deleted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    refetchQueries: [GetPortfolio],
+  });
 
   const { data: dataTest } = useQuery(GetPortfolioById, { variables: { portfolio_id: idDelete } });
 
@@ -136,7 +149,7 @@ function PortfolioAdminPage() {
             <table className="mx-auto w-full whitespace-normal rounded-lg bg-gray-200 divide-y divide-gray-300 overflow-hidden">
               <thead className="thead">
                 <tr className="text-white text-left">
-                  <th className="font-semibold text-sm uppercase px-6 py-4"> No </th>
+                  <th className="font-semibold text-sm uppercase px-6 py-4"> Id </th>
                   <th className="font-semibold text-sm uppercase px-6 py-4"> Title </th>
                   <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Desciption </th>
                   <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Image </th>

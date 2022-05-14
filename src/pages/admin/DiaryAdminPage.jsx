@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import DateTime from "../../components/DateTime";
 import SideBar from "../../components/SideBar";
+import Swal from "sweetalert2";
 import { MdTitle, MdImage, MdPlace, MdDescription, MdDelete } from "react-icons/md";
 
 import { useState } from "react";
@@ -15,6 +16,13 @@ import LoadingAnimation from "../../components/LoadingAnimation";
 import ModalUpdateDiary from "../../components/ModalUpdateDiary";
 
 function DiaryAdminPage() {
+  const defaultDiary = {
+    title: "",
+    image: "",
+    place: "",
+    description: "",
+  };
+
   const diary = {
     title: "",
     image: "",
@@ -30,7 +38,16 @@ function DiaryAdminPage() {
 
   const { data: allDiary, error: errorFetchDiary, loading: loadingFetchDiary } = useQuery(GetDiary);
   const [insertDiary, { loading: loadingInsert }] = useMutation(InsertDiary, { refetchQueries: [GetDiary] });
-  const [deleteDiary, { loading: loadingDelete }] = useMutation(DeleteDiary, { refetchQueries: [GetDiary] });
+  const [deleteDiary, { loading: loadingDelete }] = useMutation(DeleteDiary, {
+    onCompleted: () => {
+      Swal.fire({
+        icon: "success",
+        title: "DELETE SUCCESS",
+        text: "Diary Deleted Successfully",
+      });
+    },
+    refetchQueries: [GetDiary],
+  });
 
   const [modalDelete, setModalDelete] = useState(false);
 
@@ -88,6 +105,12 @@ function DiaryAdminPage() {
     refImage.current.value = "";
   };
 
+  const handleReset = () => {
+    setData(defaultDiary);
+    setImage(null);
+    refImage.current.value = "";
+  };
+
   if (loadingInsert) return <LoadingAnimation />;
   if (errorFetchDiary) {
     return console.log(`error! ${errorFetchDiary.message}`);
@@ -110,7 +133,7 @@ function DiaryAdminPage() {
             <table className="mx-auto w-full whitespace-normal rounded-lg bg-gray-200 divide-y divide-gray-300 overflow-hidden">
               <thead className="thead">
                 <tr className="text-white text-left">
-                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2"> No </th>
+                  <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2"> Id </th>
                   <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2"> Title </th>
                   <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Desciption </th>
                   <th className="font-semibold text-sm uppercase lg:px-6 lg:py-4 px-4 py-2 text-center"> Image </th>
@@ -224,7 +247,9 @@ function DiaryAdminPage() {
             </div>
           </div>
           <div className="flex flex-row gap-x-5 p-5 justify-center">
-            <button className="btn-reset lg:w-1/6 w-1/2 text-center py-2">Reset</button>
+            <button onClick={handleReset} className="btn-reset lg:w-1/6 w-1/2 text-center py-2">
+              Reset
+            </button>
             <button className="btn-submit lg:w-1/6 w-1/2 text-center py-2">Submit</button>
           </div>
         </form>

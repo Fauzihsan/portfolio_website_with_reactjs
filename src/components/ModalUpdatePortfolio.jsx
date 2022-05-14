@@ -8,6 +8,7 @@ import { useMutation } from "@apollo/client";
 import { useRef } from "react";
 import storage from "../firebase";
 import { MdTitle, MdImage, MdCategory, MdDescription } from "react-icons/md";
+import Swal from "sweetalert2";
 
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import PortfolioAdminPage from "../pages/admin/PortfolioAdminPage";
@@ -28,7 +29,18 @@ function ModalUpdatePortfolio({ data }) {
 
   const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
   const { data: dataImagePortfolio } = useQuery(GetImagePortfolioById, { variables: { portfolio_id } });
-  const [updatePortfolio, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdatePortfolio, { refetchQueries: [GetPortfolio] });
+  const [updatePortfolio, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdatePortfolio, {
+    onCompleted: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Portfolio Updated Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    refetchQueries: [GetPortfolio],
+  });
   const [deleteImage] = useMutation(DeleteImage, { refetchQueries: [GetPortfolio] });
 
   const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
@@ -218,8 +230,8 @@ function ModalUpdatePortfolio({ data }) {
                     </div>
                   </div>
                   <div className="flex flex-row gap-x-5 p-5 justify-center">
-                    <button type="reset" className="btn-reset lg:w-1/6 w-1/2 text-center py-2">
-                      Reset
+                    <button onClick={handleToggleModalUpdate} className="btn-reset lg:w-1/6 w-1/2 text-center py-2">
+                      Cancel
                     </button>
                     <button type="submit" className="btn-submit lg:w-1/6 w-1/2 text-center py-2">
                       Update

@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import DiaryAdminPage from "./pages/admin/DiaryAdminPage";
 import PortfolioAdminPage from "./pages/admin/PortfolioAdminPage";
 import HomePage from "./pages/admin/HomePage";
+import AdminRoute from "./components/AdminRoute";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -18,11 +20,14 @@ function App() {
       <Route path="/journey" element={<JourneyPage />} />
       <Route path="/diary" element={<DiaryPage />} />
 
-      {/* admin page */}
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/admin" element={<HomePage />} />
-      <Route path="/admin/diary" element={<DiaryAdminPage />} />
-      <Route path="/admin/portfolio" element={<PortfolioAdminPage />} />
+
+      <Route element={<AdminRoute />}>
+        <Route path="/admin" element={<HomePage />} />
+        <Route path="/admin/diary" element={<DiaryAdminPage />} />
+        <Route path="/admin/portfolio" element={<PortfolioAdminPage />} />
+      </Route>
+      <Route path="*" element={<ErrorPage code="404" title="Ooopss Page Not Found" />} />
     </Routes>
   );
 }

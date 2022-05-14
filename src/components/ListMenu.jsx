@@ -1,11 +1,14 @@
 import React from "react";
 import "../assets/css/adminPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { GiBookCover } from "react-icons/gi";
 import { RiFileHistoryFill, RiLogoutBoxRLine } from "react-icons/ri";
+import { loginStatus } from "../utils/helpers/loginStatus";
 
 function ListMenu() {
+  const navigate = useNavigate();
+
   return (
     <ul className="menuSideBar">
       <li className="liSide">
@@ -25,7 +28,7 @@ function ListMenu() {
         </Link>
       </li>
       <li className="liSide">
-        <Link to="/admin/portfolio" className="aSide">
+        <Link to="/admin/portfolio" className="aSide ">
           <div className="flex flex-row gap-x-5 px-5 justify-start">
             <RiFileHistoryFill style={{ fontSize: "24px" }} />
             Portfolio
@@ -33,12 +36,12 @@ function ListMenu() {
         </Link>
       </li>
       <li className="liSide">
-        <Link to="/" className="aSide">
-          <div className="flex flex-row gap-x-5 px-5 justify-start">
+        <div onClick={() => loginStatus.setLogout(navigate)} className="aSide cursor-pointer">
+          <div className="flex flex-row gap-x-5 px-5 justify-start w-full">
             <RiLogoutBoxRLine style={{ fontSize: "24px" }} />
             Logout
           </div>
-        </Link>
+        </div>
       </li>
     </ul>
   );

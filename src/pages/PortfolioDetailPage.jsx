@@ -11,13 +11,11 @@ import LoadingAnimation from "../components/LoadingAnimation";
 function PortfolioDetailPage() {
   const params = useParams();
   const id = params.id;
-  console.log(id);
   const { data, loading } = useQuery(GetPortfolioById, { variables: { portfolio_id: id } });
   const { data: portfolioCategory } = useQuery(GetPortfolioCategory);
 
   if (loading) return <LoadingAnimation />;
   const { title, categories_id, description, imagePortfolio } = data?.portfolio[0];
-  console.log(title);
   return (
     <>
       <div className="container lg:py-5 md:py-3 py-1 mx-auto">
