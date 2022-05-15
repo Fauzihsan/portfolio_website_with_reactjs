@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import "../assets/css/adminPage.css";
+import "../assets/css/adminPageStyle.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

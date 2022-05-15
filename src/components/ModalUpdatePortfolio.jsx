@@ -1,26 +1,29 @@
 import React from "react";
 import { useState } from "react";
-import { UpdatePortfolio, InsertImage, DeleteImage } from "../graphql/mutation";
-import { useQuery } from "@apollo/client";
-import { GetPortfolioCategory, GetPortfolio, GetImagePortfolioById } from "../graphql/query";
-import { MdEdit } from "react-icons/md";
-import { useMutation } from "@apollo/client";
 import { useRef } from "react";
-import storage from "../firebase";
+import { MdEdit } from "react-icons/md";
 import { MdTitle, MdImage, MdCategory, MdDescription } from "react-icons/md";
-import Swal from "sweetalert2";
 
+import { useQuery, useMutation } from "@apollo/client";
+import { UpdatePortfolio, InsertImage, DeleteImage } from "../graphql/mutation";
+import { GetPortfolioCategory, GetPortfolio, GetImagePortfolioById } from "../graphql/query";
+
+import storage from "../firebase";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+
+import Swal from "sweetalert2";
 import PortfolioAdminPage from "../pages/admin/PortfolioAdminPage";
 
 function ModalUpdatePortfolio({ data }) {
   const { portfolio_id, title, categories_id, description } = data;
+
   const portfolioUpdate = {
     portfolio_id,
     title,
     categories_id,
     description,
   };
+
   const [modalUpdate, setModalUpdate] = useState(false);
   const [image, setImage] = useState([]);
   const [imageUpdate, setImageUpdate] = useState([]);
@@ -29,6 +32,9 @@ function ModalUpdatePortfolio({ data }) {
 
   const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
   const { data: dataImagePortfolio } = useQuery(GetImagePortfolioById, { variables: { portfolio_id } });
+
+  const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
+
   const [updatePortfolio, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdatePortfolio, {
     onCompleted: () => {
       Swal.fire({
@@ -41,9 +47,8 @@ function ModalUpdatePortfolio({ data }) {
     },
     refetchQueries: [GetPortfolio],
   });
-  const [deleteImage] = useMutation(DeleteImage, { refetchQueries: [GetPortfolio] });
 
-  const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
+  const [deleteImage] = useMutation(DeleteImage, { refetchQueries: [GetPortfolio] });
 
   const handleFile = (e) => {
     const images = [];
@@ -118,6 +123,7 @@ function ModalUpdatePortfolio({ data }) {
       setDataUpdate({ ...dataUpdate, [name]: value });
     }
   };
+
   const handleUpdate = (e) => {
     e.preventDefault();
     handleUpload(imageUpdate);

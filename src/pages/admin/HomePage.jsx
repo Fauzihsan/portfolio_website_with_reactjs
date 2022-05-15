@@ -1,18 +1,22 @@
 import React from "react";
 import { useEffect } from "react";
+
 import DashboardListItem from "../../components/DashboardListItem";
 import DateTime from "../../components/DateTime";
 import SideBar from "../../components/SideBar";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 import { useSubscription } from "@apollo/client";
-import { SubscriptionCountExperience, SubscriptionCountProject, SubscriptionCountSkill, SubscriptionDiary, SubscriptionPortfolio } from "../../graphql/subscription";
+import { SubscriptionCountExperience, SubscriptionCountProject, SubscriptionCountSkill, SubscriptionDiary } from "../../graphql/subscription";
 
 function HomePage() {
   const { data: dataPortfolioExperience } = useSubscription(SubscriptionCountExperience);
   const { data: dataPortfolioSkill } = useSubscription(SubscriptionCountSkill);
   const { data: dataPortfolioProject } = useSubscription(SubscriptionCountProject);
   const { data: dataDiary } = useSubscription(SubscriptionDiary);
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();

@@ -1,21 +1,18 @@
-import { useLazyQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import { FaHome } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { useLazyQuery } from "@apollo/client";
 import { GetUser } from "../graphql/query";
 import { loginStatus } from "../utils/helpers/loginStatus";
-
 import "../assets/css/loginPageStyle.css";
 import LoadingAnimation from "../components/LoadingAnimation";
-import AdminRoute from "../components/AdminRoute";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [getUser, { data, loading, error }] = useLazyQuery(GetUser);
+  const [getUser, { data, loading }] = useLazyQuery(GetUser);
 
   let navigate = useNavigate();
-  let isNotValid = false;
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);

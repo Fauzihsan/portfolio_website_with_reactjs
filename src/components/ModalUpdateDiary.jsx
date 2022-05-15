@@ -1,20 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { useRef } from "react";
+import { MdEdit } from "react-icons/md";
+import { MdTitle, MdImage, MdPlace, MdDescription } from "react-icons/md";
+
+import { useMutation } from "@apollo/client";
 import { UpdateDiary } from "../graphql/mutation";
 import { GetDiary } from "../graphql/query";
-import { MdEdit } from "react-icons/md";
-import { useMutation } from "@apollo/client";
-import { useRef } from "react";
+
 import storage from "../firebase";
-import { MdTitle, MdImage, MdPlace, MdDescription } from "react-icons/md";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+
 import Swal from "sweetalert2";
 
-import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
-import LoadingAnimation from "./LoadingAnimation";
 import DiaryAdminPage from "../pages/admin/DiaryAdminPage";
 
 function ModalUpdateDiary({ data }) {
   const { id, title, image, place, description } = data;
+
   const diaryUpdate = {
     id,
     title,
@@ -22,10 +25,12 @@ function ModalUpdateDiary({ data }) {
     place,
     description,
   };
+
   const [modalUpdate, setModalUpdate] = useState(false);
   const [imageUpdate, setImageUpdate] = useState(null);
   const [dataUpdate, setDataUpdate] = useState(diaryUpdate);
   const imageRef = useRef();
+
   const [updateDiary, { loading: loadingUpdate, error: errorUpdate }] = useMutation(UpdateDiary, {
     onCompleted: () => {
       Swal.fire({
@@ -40,7 +45,6 @@ function ModalUpdateDiary({ data }) {
   });
 
   const handleToggleModalUpdate = () => {
-    // setDataUpdate({ id, title, image, place, description });
     setModalUpdate(!modalUpdate);
   };
 

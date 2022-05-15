@@ -32,6 +32,24 @@ export const InsertPortfolio = gql`
   }
 `;
 
+export const UpdatePortfolio = gql`
+  mutation MyMutation($portfolio_id: String!, $title: String!, $categories_id: Int!, $description: String!) {
+    update_portfolio_by_pk(pk_columns: { portfolio_id: $portfolio_id }, _set: { title: $title, categories_id: $categories_id, description: $description }) {
+      portfolio_id
+    }
+  }
+`;
+
+export const DeletePortfolio = gql`
+  mutation MyMutation($portfolio_id: String!) {
+    delete_portfolio(where: { portfolio_id: { _eq: $portfolio_id } }) {
+      returning {
+        title
+      }
+    }
+  }
+`;
+
 export const InsertImage = gql`
   mutation MyMutation($images: [image_insert_input!]!) {
     insert_image(objects: $images) {
@@ -50,24 +68,6 @@ export const DeleteImage = gql`
       returning {
         image
         id
-      }
-    }
-  }
-`;
-
-export const UpdatePortfolio = gql`
-  mutation MyMutation($portfolio_id: String!, $title: String!, $categories_id: Int!, $description: String!) {
-    update_portfolio_by_pk(pk_columns: { portfolio_id: $portfolio_id }, _set: { title: $title, categories_id: $categories_id, description: $description }) {
-      portfolio_id
-    }
-  }
-`;
-
-export const DeletePortfolio = gql`
-  mutation MyMutation($portfolio_id: String!) {
-    delete_portfolio(where: { portfolio_id: { _eq: $portfolio_id } }) {
-      returning {
-        title
       }
     }
   }

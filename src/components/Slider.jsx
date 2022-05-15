@@ -1,10 +1,6 @@
 import React, { useState, useRef } from "react";
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
-let photoProjects = [
-  // "https://images.unsplash.com/photo-1519068737630-e5db30e12e42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-  // "https://images.unsplash.com/photo-1521386201167-03ddabe2af97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-  // "https://images.unsplash.com/photo-1490109875367-0dbd3c96fa1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-];
+let photoProjects = [];
 
 let count = 0;
 export default function Slider({ image }) {
@@ -30,8 +26,8 @@ export default function Slider({ image }) {
   };
   return (
     <div ref={slideRef} className="w-full select-none relative">
-      <div className="aspect-w-16 aspect-h-9">
-        <img src={photoProjects[currentIndex]} alt="" className="mx-auto" />
+      <div className="aspect-w-16 aspect-h-9 w-96 h-90 p-5 mx-auto">
+        <img src={photoProjects[currentIndex]} alt="" className="mx-auto max-w-full max-h-full " />
       </div>
 
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">

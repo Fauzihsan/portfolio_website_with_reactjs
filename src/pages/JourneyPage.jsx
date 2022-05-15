@@ -1,14 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../assets/css/journeyPageStyle.css";
 import Footer from "../components/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { SubscriptionCountExperience, SubscriptionCountSkill } from "../graphql/subscription";
 import { useSubscription } from "@apollo/client";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function JourneyPage() {
   const { data: dataPortfolioExperience } = useSubscription(SubscriptionCountExperience);

@@ -1,11 +1,10 @@
 import React from "react";
-import "../assets/css/diaryPage.css";
-import ListStory from "../components/ListStory";
-
+import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import "../assets/css/diaryPageStyle.css";
+import ListStory from "../components/ListStory";
 import ButtonBackToTop from "../components/ButtonBackToTop";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 
 function DiaryPage() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { FaBars, FaWindowClose } from "react-icons/fa";
-import "../assets/css/adminPage.css";
+import "../assets/css/adminPageStyle.css";
 import ListMenu from "./ListMenu";
 
 function SideBar() {

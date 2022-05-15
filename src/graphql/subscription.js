@@ -1,5 +1,18 @@
 import { gql } from "@apollo/client";
 
+export const SubscriptionDiary = gql`
+  subscription MySubscription {
+    diary(order_by: { id: desc }) {
+      id
+      title
+      place
+      image
+      description
+      created_at
+    }
+  }
+`;
+
 export const SubscriptionPortfolio = gql`
   subscription MySubscription {
     portfolio {
@@ -57,19 +70,6 @@ export const SubscriptionCountProject = gql`
         id
         image
       }
-    }
-  }
-`;
-
-export const SubscriptionDiary = gql`
-  subscription MySubscription {
-    diary(order_by: { id: desc }) {
-      id
-      title
-      place
-      image
-      description
-      created_at
     }
   }
 `;

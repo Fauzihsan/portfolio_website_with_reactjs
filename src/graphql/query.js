@@ -24,18 +24,6 @@ export const GetDiary = gql`
   }
 `;
 
-// export const GetPortfolio = gql`
-//   query MyQuery {
-//     portfolio(order_by: { id: desc }) {
-//       id
-//       title
-//       image
-//       description
-//       categories_id
-//     }
-//   }
-// `;
-
 export const GetPortfolio = gql`
   query MyQuery {
     portfolio {
@@ -47,6 +35,21 @@ export const GetPortfolio = gql`
         id
         image
         portfolio_id
+      }
+    }
+  }
+`;
+
+export const GetPortfolioById = gql`
+  query MyQuery($portfolio_id: String!) {
+    portfolio(where: { portfolio_id: { _eq: $portfolio_id } }) {
+      portfolio_id
+      title
+      description
+      categories_id
+      imagePortfolio {
+        id
+        image
       }
     }
   }
@@ -71,33 +74,6 @@ export const GetImagePortfolioById = gql`
     }
   }
 `;
-
-export const GetPortfolioById = gql`
-  query MyQuery($portfolio_id: String!) {
-    portfolio(where: { portfolio_id: { _eq: $portfolio_id } }) {
-      portfolio_id
-      title
-      description
-      categories_id
-      imagePortfolio {
-        id
-        image
-      }
-    }
-  }
-`;
-
-// export const GetPortfolioById = gql`
-//   query MyQuery($_id: Int!) {
-//     portfolio(where: { id: { _eq: $_id } }) {
-//       id
-//       image
-//       title
-//       description
-//       categories_id
-//     }
-//   }
-// `;
 
 export const GetPortfolioCategory = gql`
   query MyQuery {

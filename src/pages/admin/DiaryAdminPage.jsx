@@ -1,10 +1,7 @@
 import React, { useRef } from "react";
-import DateTime from "../../components/DateTime";
-import SideBar from "../../components/SideBar";
-import Swal from "sweetalert2";
+import { useState } from "react";
 import { MdTitle, MdImage, MdPlace, MdDescription, MdDelete } from "react-icons/md";
 
-import { useState } from "react";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import storage from "../../firebase/index";
 
@@ -12,8 +9,12 @@ import { useQuery, useMutation } from "@apollo/client";
 import { InsertDiary, DeleteDiary } from "../../graphql/mutation";
 import { GetDiary } from "../../graphql/query";
 
+import DateTime from "../../components/DateTime";
+import SideBar from "../../components/SideBar";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import ModalUpdateDiary from "../../components/ModalUpdateDiary";
+
+import Swal from "sweetalert2";
 
 function DiaryAdminPage() {
   const defaultDiary = {
@@ -33,23 +34,36 @@ function DiaryAdminPage() {
   const [data, setData] = useState(diary);
   const [idDelete, setIdDelete] = useState("");
   const [imageDelete, setImageDelete] = useState("");
+  const [modalDelete, setModalDelete] = useState(false);
+  const [image, setImage] = useState(null);
 
   const refImage = useRef();
 
   const { data: allDiary, error: errorFetchDiary, loading: loadingFetchDiary } = useQuery(GetDiary);
-  const [insertDiary, { loading: loadingInsert }] = useMutation(InsertDiary, { refetchQueries: [GetDiary] });
-  const [deleteDiary, { loading: loadingDelete }] = useMutation(DeleteDiary, {
+  const [insertDiary, { loading: loadingInsert }] = useMutation(InsertDiary, {
     onCompleted: () => {
       Swal.fire({
+        position: "top-end",
         icon: "success",
-        title: "DELETE SUCCESS",
-        text: "Diary Deleted Successfully",
+        title: "Diary Inserted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
       });
     },
     refetchQueries: [GetDiary],
   });
-
-  const [modalDelete, setModalDelete] = useState(false);
+  const [deleteDiary, { loading: loadingDelete }] = useMutation(DeleteDiary, {
+    onCompleted: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Diary Deleted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    refetchQueries: [GetDiary],
+  });
 
   const handleToggleModalDelete = (id, image) => {
     setModalDelete(!modalDelete);
@@ -57,7 +71,6 @@ function DiaryAdminPage() {
     setImageDelete(image);
   };
 
-  const [image, setImage] = useState(null);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -217,17 +230,6 @@ function DiaryAdminPage() {
                   onChange={handleChange}
                 />
               </div>
-              {/* <label htmlFor="">Date</label>
-              <div className="flex flex-row items-center">
-                <MdDateRange style={{ fontSize: "34px" }} />
-                <input
-                  type="date"
-                  name=""
-                  id=""
-                  className="form-control w-full block px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  required
-                />
-              </div> */}
             </div>
             <div className="flex flex-col gap-y-5 justify-start lg:w-1/3 w-full">
               <label htmlFor="">Description</label>

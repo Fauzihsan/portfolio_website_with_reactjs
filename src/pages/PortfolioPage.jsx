@@ -1,17 +1,17 @@
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../assets/css/portfolioPageStyle.css";
 import ButtonBackToTop from "../components/ButtonBackToTop";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
 import { useSubscription } from "@apollo/client";
-import { SubscriptionPortfolio } from "../graphql/subscription";
+import { SubscriptionCountProject } from "../graphql/subscription";
 
 function PortfolioPage() {
-  const { data } = useSubscription(SubscriptionPortfolio);
+  const { data } = useSubscription(SubscriptionCountProject);
 
   useEffect(() => {
     AOS.init();
@@ -58,7 +58,7 @@ function PortfolioPage() {
           <div key={item.portfolio_id} className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
             <div className="justify-center gap-x-1">
               <div className="p-5 gap-y-4 flex flex-col">
-                {data?.portfolio.imagePortfolio !== [] ? <img src={item.imagePortfolio[0]?.image} alt="" /> : []}
+                <div className="aspect-w-16 aspect-h-9 w-96 h-90 p-5 mx-auto">{data?.portfolio.imagePortfolio !== [] ? <img src={item.imagePortfolio[0]?.image} alt="" className="mx-auto max-w-full max-h-full " /> : []}</div>
                 <p className="aboutmeTitle text-center text-2xl">{item.title}</p>
                 <p className="aboutmeDescription text-center">{item.description.slice(0, 50) + (item.description.length > 50 ? " ... " : "")}</p>
               </div>

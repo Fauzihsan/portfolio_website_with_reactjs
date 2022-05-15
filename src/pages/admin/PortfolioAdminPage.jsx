@@ -1,33 +1,53 @@
 import React, { useState, useRef } from "react";
+import { MdDelete } from "react-icons/md";
+import { MdTitle, MdImage, MdCategory, MdDescription } from "react-icons/md";
+
 import SideBar from "../../components/SideBar";
 import DateTime from "../../components/DateTime";
 import LoadingAnimation from "../../components/LoadingAnimation";
-import { MdDelete } from "react-icons/md";
-import { MdTitle, MdImage, MdCategory, MdDescription } from "react-icons/md";
-import { GetPortfolioCategory, GetPortfolio, GetPortfolioById } from "../../graphql/query";
+import ModalUpdatePortfolio from "../../components/ModalUpdatePortfolio";
 
+import { GetPortfolioCategory, GetPortfolio, GetPortfolioById } from "../../graphql/query";
 import { InsertPortfolio, DeletePortfolio, InsertImage } from "../../graphql/mutation";
 import { useMutation, useQuery } from "@apollo/client";
-import ModalUpdatePortfolio from "../../components/ModalUpdatePortfolio";
+
 import storage from "../../firebase";
 import { deleteObject, getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
 import Swal from "sweetalert2";
-
 import { v4 as uuidv4 } from "uuid";
-function PortfolioAdminPage() {
-  const [modalDelete, setModalDelete] = useState(false);
 
-  const handleToggleModalDelete = (id, image) => {
-    setModalDelete(!modalDelete);
-    setIdDelete(id);
-    setImageDelete(image);
+function PortfolioAdminPage() {
+  const portfolio = {
+    title: "",
+    categories_id: 0,
+    description: "",
   };
 
+  const [modalDelete, setModalDelete] = useState(false);
   const [idDelete, setIdDelete] = useState("");
-  const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
+  const [data, setData] = useState(portfolio);
+  const [image, setImage] = useState([]);
 
-  const [imageDelete, setImageDelete] = useState("");
+  const refImage = useRef();
+
+  const { data: allPortfolio, error: errorFetchPortfolio, loading: loadingFetchPortfolio } = useQuery(GetPortfolio);
+  const { data: dataPortfolioCategory } = useQuery(GetPortfolioCategory);
+  const { data: dataPortfolioById } = useQuery(GetPortfolioById, { variables: { portfolio_id: idDelete } });
+
+  const [insertPortfolio, { loading: loadingInsert }] = useMutation(InsertPortfolio, {
+    onCompleted: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Portfolio Inserted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    refetchQueries: [GetPortfolio],
+  });
+  const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
   const [deletePortfolio, { loading: loadingDelete }] = useMutation(DeletePortfolio, {
     onCompleted: () => {
       Swal.fire({
@@ -41,23 +61,11 @@ function PortfolioAdminPage() {
     refetchQueries: [GetPortfolio],
   });
 
-  const { data: dataTest } = useQuery(GetPortfolioById, { variables: { portfolio_id: idDelete } });
-
-  // const { title, categories_id, description, imagePortfolio } = dataTest?.portfolio[0];
-
-  const portfolio = {
-    title: "",
-    categories_id: 0,
-    description: "",
+  const handleToggleModalDelete = (id, image) => {
+    setModalDelete(!modalDelete);
+    setIdDelete(id);
   };
 
-  const [data, setData] = useState(portfolio);
-  const refImage = useRef();
-
-  const { data: allPortfolio, error: errorFetchPortfolio, loading: loadingFetchPortfolio } = useQuery(GetPortfolio);
-
-  const [insertPortfolio, { loading: loadingInsert }] = useMutation(InsertPortfolio, { refetchQueries: [GetPortfolio] });
-  const [insertImagePortfolio] = useMutation(InsertImage, { refetchQueries: [GetPortfolio] });
   const handleOnChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -68,7 +76,7 @@ function PortfolioAdminPage() {
       setData({ ...data, [name]: value });
     }
   };
-  const [image, setImage] = useState([]);
+
   const handleFile = (e) => {
     const images = [];
     for (let i = 0; i < e.target.files.length; i++) {
@@ -115,6 +123,7 @@ function PortfolioAdminPage() {
     setImage([]);
     refImage.current.value = "";
   };
+
   const handleDeletePortfolio = () => {
     deletePortfolio({
       variables: {
@@ -122,8 +131,8 @@ function PortfolioAdminPage() {
       },
     });
 
-    for (let i = 0; i < dataTest?.portfolio[0].imagePortfolio.length; i++) {
-      const fileUrl = dataTest?.portfolio[0].imagePortfolio[i].image;
+    for (let i = 0; i < dataPortfolioById?.portfolio[0].imagePortfolio.length; i++) {
+      const fileUrl = dataPortfolioById?.portfolio[0].imagePortfolio[i].image;
       const fileRef = ref(storage, fileUrl);
       deleteObject(fileRef);
     }
@@ -193,6 +202,7 @@ function PortfolioAdminPage() {
             </table>
           </div>
         </div>
+
         <form onSubmit={handleSubmit} className="formDiary container py-5">
           <div className="flex lg:flex-row flex-col gap-x-5 justify-center">
             <div className="flex flex-col gap-y-3 justify-start lg:w-1/2 w-full">
