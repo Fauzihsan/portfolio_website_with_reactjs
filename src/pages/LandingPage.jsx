@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
 import "../assets/css/landingPageStyle.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop";
-import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function LandingPage() {
   useEffect(() => {

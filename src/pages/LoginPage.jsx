@@ -1,16 +1,16 @@
-import { useLazyQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import { FaHome } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { GetUser } from "../apollo-client/gql";
-
+import { FaHome } from "react-icons/fa";
+import { useLazyQuery } from "@apollo/client";
+import { GetUser } from "../graphql/query";
+import { loginStatus } from "../utils/helpers/loginStatus";
 import "../assets/css/loginPageStyle.css";
 import LoadingAnimation from "../components/LoadingAnimation";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [getUser, { data, loading, error }] = useLazyQuery(GetUser);
+  const [getUser, { data, loading }] = useLazyQuery(GetUser);
 
   let navigate = useNavigate();
 
@@ -29,6 +29,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (data?.users.length === 1) {
+      loginStatus.setLogin(data?.users[0].email);
       return navigate("/admin");
     }
   }, [data]);
@@ -40,7 +41,7 @@ function LoginPage() {
   return (
     <div className="mainLogin flex justify-center items-center">
       <Link to="/">
-        <FaHome style={{ fontSize: "30px", color: "#fffafa", opacity: "0.5" }} className="absolute left-5 top-5" />
+        <FaHome style={{ fontSize: "30px", color: "#fffafa", opacity: "0.5" }} className="absolute left-10 top-5" />
       </Link>
       <div className="box lg:p-10 p-3 w-3/4 h-3/4">
         <h1 className="title text-center text-3xl">I's Journey</h1>

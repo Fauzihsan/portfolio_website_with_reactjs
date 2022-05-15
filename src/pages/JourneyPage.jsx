@@ -1,14 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../assets/css/journeyPageStyle.css";
 import Footer from "../components/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { SubscriptionCountExperience, SubscriptionCountSkill } from "../graphql/subscription";
+import { useSubscription } from "@apollo/client";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 function JourneyPage() {
+  const { data: dataPortfolioExperience } = useSubscription(SubscriptionCountExperience);
+  const { data: dataPortfolioSkill } = useSubscription(SubscriptionCountSkill);
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -58,12 +62,9 @@ function JourneyPage() {
           <div className="lg:w-1/2 lg:mt-0 w-full p-5 justify-center text-center mx-auto text-3xl lg:py-20">
             <h1 className="titleCategoryJourney">Skills</h1>
             <ul className="listCategoryJourney py-10">
-              <li>React</li>
-              <li>React</li>
-              <li>React</li>
-              <li>React</li>
-              <li>React</li>
-              <li>React</li>
+              {dataPortfolioSkill?.portfolio.map((item) => (
+                <li key={item.portfolio_id}>{item.title}</li>
+              ))}
             </ul>
           </div>
         </section>
@@ -71,9 +72,12 @@ function JourneyPage() {
           <div className="lg:w-1/2 w-full p-5 justify-center text-center mx-auto text-3xl lg:py-20">
             <h1 className="titleCategoryJourney">Experience</h1>
             <ul className="listCategoryJourney py-10 text-lg">
-              <li>"Divisi Teknis” at Informatics Engineering Laboratory Assistant Suryakancana University (2020 - 2021)"</li>
-              <hr style={{ border: "1px solid #24507b" }} />
-              <li>"Koordinator Teknis” at Informatics Engineering Laboratory Assistant Suryakancana University (2021 - 2022)"</li>
+              {dataPortfolioExperience?.portfolio.map((item) => (
+                <div key={item.portfolio_id}>
+                  <li>{item.title}</li>
+                  <hr style={{ border: "1px solid #24507b" }} />
+                </div>
+              ))}
             </ul>
           </div>
         </section>
