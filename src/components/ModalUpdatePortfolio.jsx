@@ -63,7 +63,8 @@ function ModalUpdatePortfolio({ data }) {
   };
 
   const handleUpload = (imageUpdate) => {
-    if (!imageUpdate) {
+    console.log(imageUpdate);
+    if (imageUpdate !== []) {
       updatePortfolio({
         variables: {
           portfolio_id,
@@ -129,7 +130,7 @@ function ModalUpdatePortfolio({ data }) {
     handleUpload(imageUpdate);
     setDataUpdate(dataUpdate);
     setModalUpdate(!modalUpdate);
-    setImageUpdate(null);
+    setImageUpdate([]);
     imageRef.current.value = "";
   };
 

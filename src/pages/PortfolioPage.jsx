@@ -58,7 +58,7 @@ function PortfolioPage() {
           <div key={item.portfolio_id} className="card-portfolio py-10 lg:w-1/3 md:w-3/4 w-full" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="2000">
             <div className="justify-center gap-x-1">
               <div className="p-5 gap-y-4 flex flex-col">
-                <div className="aspect-w-16 aspect-h-9 w-96 h-90 p-5 mx-auto">{data?.portfolio.imagePortfolio !== [] ? <img src={item.imagePortfolio[0]?.image} alt="" className="mx-auto max-w-full max-h-full " /> : []}</div>
+                <div className="aspect-w-16 aspect-h-9 lg:w-96 lg:h-40 w-full h-full p-5 mx-auto">{data?.portfolio.imagePortfolio !== [] ? <img src={item.imagePortfolio[0]?.image} alt="" className="mx-auto max-w-full max-h-full " /> : []}</div>
                 <p className="aboutmeTitle text-center text-2xl">{item.title}</p>
                 <p className="aboutmeDescription text-center">{item.description.slice(0, 50) + (item.description.length > 50 ? " ... " : "")}</p>
               </div>
