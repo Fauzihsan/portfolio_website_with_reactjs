@@ -26,7 +26,7 @@ export default function Slider({ image }) {
   };
   return (
     <div ref={slideRef} className="w-full select-none relative">
-      <div className="aspect-w-16 aspect-h-9 w-96 h-90 p-5 mx-auto">
+      <div className="aspect-w-16 aspect-h-9 lg:w-96 w-full h-full p-5 mx-auto">
         <img src={photoProjects[currentIndex]} alt="" className="mx-auto max-w-full max-h-full " />
       </div>
 

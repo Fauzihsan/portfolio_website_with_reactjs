@@ -112,7 +112,6 @@ label #cancel {
   box-shadow: 5px 2px 5px #20486f, -2px -2px 5px #285887;
   border-radius: 5px;
   transition: all 0.5s ease;
-  border: 3px 3px solid black;
   z-index: 9;
 }
 
