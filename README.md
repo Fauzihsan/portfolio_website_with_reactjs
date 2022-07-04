@@ -28,4 +28,4 @@ This project is a portfolio website, where the purpose of making this website is
 
 ![Landing  page](https://drive.google.com/uc?export=view&id=1bMEQlWWCdFPSX34B_FwsH0oxRLWw2OiN)
 
-If you want to see more of this project, then take a look at **_[www.ihsansjourney.website](https://github.com/Fauzihsan/react_redux.git)_**
+### If you want to see more of this project, then take a look at _[www.ihsansjourney.website](https://ihsansjourney.website)_
